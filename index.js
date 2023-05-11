@@ -54,7 +54,7 @@ app.use("/pengeluaran", require("./routes/kopi/Pengeluaran"));
 app.use("/inventaris", require("./routes/kopi/Inventaris"));
 
 app.get("/", (req, res) => {
-  res.json("Welcome in Srikandi");
+  res.json("Welcome in srikandi");
 });
 
 app.listen(5000, () => {
