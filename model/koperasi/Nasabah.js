@@ -21,6 +21,9 @@ const UserSchema = new Schema({
   status: {
     type: String,
   },
+  statusPinjam: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("nasabah", UserSchema);

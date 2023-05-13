@@ -60,6 +60,61 @@ exports.getAllUser = () =>
       .catch(() => reject(requestResponse.kesalahan));
   });
 
+exports.getStatusAktif = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .find({
+        status: "Aktif",
+      })
+      .then((user) => {
+        console.log(requestResponse.berhasil("berhasil get status aktif"));
+        resolve(requestResponse.suksesWithData(user));
+      })
+      .catch(() => reject(requestResponse.kesalahan));
+  });
+
+exports.getStatusTidakAktif = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .find({
+        status: "Tidak Aktif",
+      })
+      .then((user) => {
+        console.log(
+          requestResponse.berhasil("berhasil get status tidak aktif")
+        );
+        resolve(requestResponse.suksesWithData(user));
+      })
+      .catch(() => reject(requestResponse.kesalahan));
+  });
+
+exports.getStatusPinjam = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .find({
+        statusPinjam: 1,
+      })
+      .then((user) => {
+        console.log(requestResponse.berhasil("berhasil get status pinjam"));
+        resolve(requestResponse.suksesWithData(user));
+      })
+      .catch(() => reject(requestResponse.kesalahan));
+  });
+
+exports.getStatusTidakPinjam = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .find({
+        statusPinjam: 0,
+      })
+      .then((user) => {
+        console.log(
+          requestResponse.berhasil("berhasil get status tidak pinjam")
+        );
+        resolve(requestResponse.suksesWithData(user));
+      })
+      .catch(() => reject(requestResponse.kesalahan));
+  });
 exports.delete = (id) =>
   new Promise((resolve, reject) => {
     userModel

@@ -15,6 +15,34 @@ router.get("/getAll", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/getStatusAktif", (req, res) => {
+  userController
+    .getStatusAktif()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+router.get("/getStatusTidakAktif", (req, res) => {
+  userController
+    .getStatusTidakAktif()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+router.get("/getStatusPinjam", (req, res) => {
+  userController
+    .getStatusPinjam()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+router.get("/getStatusTidakPinjam", (req, res) => {
+  userController
+    .getStatusTidakPinjam()
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
 router.put("/edit/:id", (req, res) => {
   let data = req.body;
   console.log(data);
