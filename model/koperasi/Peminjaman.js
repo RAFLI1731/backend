@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const objectId = mongoose.Types.ObjectId;
 
 const UserSchema = new Schema({
   tanggal: {
-    type: String,
-  },
-  namaPeminjam: {
     type: String,
   },
   keterangan: {
@@ -21,6 +19,9 @@ const UserSchema = new Schema({
   total: {
     type: Number,
     default: 0,
+  },
+  idNasabah: {
+    type: objectId,
   },
 });
 

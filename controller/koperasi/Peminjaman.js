@@ -17,17 +17,6 @@ exports.tambah = (data) =>
       });
   });
 
-exports.getAllUser = () =>
-  new Promise((resolve, reject) => {
-    userModel
-      .find({})
-      .then((user) => {
-        console.log(requestResponse.berhasil("berhasil get Peminjaman"));
-        resolve(requestResponse.suksesWithData(user));
-      })
-      .catch(() => reject(requestResponse.kesalahan));
-  });
-
 exports.delete = (id) =>
   new Promise((resolve, reject) => {
     userModel
@@ -62,4 +51,32 @@ exports.edit = (data, id) =>
         resolve(requestResponse.berhasil("Berhasil Edit Peminjaman"));
       })
       .catch(() => reject(requestResponse.serverError));
+  });
+
+exports.getAllUser = () =>
+  new Promise((resolve, reject) => {
+    userModel
+      .aggregate([
+        {
+          $lookup: {
+            from: "nasabahs",
+            localField: "idNasabah",
+            foreignField: "_id",
+            as: "nasabahSrikandi",
+          },
+        },
+        {
+          $unwind: "$nasabahSrikandi",
+        },
+      ])
+      .then((nasabahs) => {
+        if (nasabahs.length > 0) {
+          resolve(requestResponse.suksesWithData(nasabahs));
+        } else {
+          reject(requestResponse.gagal("Gagal Mengambil Data"));
+        }
+      })
+      .catch((err) => {
+        reject(requestResponse.kesalahan);
+      });
   });
